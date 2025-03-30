@@ -21,7 +21,9 @@ WORKDIR /var/www/html
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Exponer el puerto 80 para Apache
-EXPOSE 80
+EXPOSE ${PORT}
+
 
 # Comando de inicio del contenedor
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
+
