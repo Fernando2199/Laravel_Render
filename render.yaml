@@ -20,6 +20,3 @@ services:
         value: sqlite
       - key: DB_DATABASE
         value: database/database.sqlite
-    buildEnvVars:
-      - key: NODE_ENV
-        value: ignore
