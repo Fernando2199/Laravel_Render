@@ -5,7 +5,7 @@ services:
     plan: free
     region: oregon
     buildCommand: |
-      composer install --no-dev --optimize-autoloader
+      composer install
       php artisan key:generate
       mkdir -p database
       touch database/database.sqlite
@@ -20,3 +20,5 @@ services:
         value: sqlite
       - key: DB_DATABASE
         value: database/database.sqlite
+      - key: PORT
+        value: 10000
