@@ -4,8 +4,13 @@ services:
     runtime: php
     plan: free
     region: oregon
-    buildCommand: "composer install && php artisan key:generate && php artisan migrate --force"
-    startCommand: "php artisan serve --host 0.0.0.0 --port 10000"
+    buildCommand: |
+      composer install
+      php artisan key:generate
+      mkdir -p database
+      touch database/database.sqlite
+      php artisan migrate --force
+    startCommand: "php artisan serve --host 0.0.0.0 --port $PORT"
     envVars:
       - key: APP_ENV
         value: production
@@ -13,4 +18,8 @@ services:
         generateValue: true
       - key: DB_CONNECTION
         value: sqlite
- 
+      - key: DB_DATABASE
+        value: database/database.sqlite
+    buildEnvVars:
+      - key: NODE_ENV
+        value: ignore
